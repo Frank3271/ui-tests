@@ -29,7 +29,7 @@ public class MainPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @Step("Открыть главную страницу Stellar Burgers")
+    // Убрали @Step, так как метод open() вызывается в @Before
     public void open() {
         driver.get("https://stellarburgers.education-services.ru/");
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));

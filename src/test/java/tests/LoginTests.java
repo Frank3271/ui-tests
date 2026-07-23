@@ -1,9 +1,9 @@
 package tests;
+
 import api.UserApiClient;
 import model.User;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import model.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import pages.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.Assert.assertTrue;
-// IU тесты
+
 public class LoginTests {
 
     private WebDriver driver;
@@ -34,7 +34,6 @@ public class LoginTests {
         driver = new ChromeDriver(options);
         mainPage = new MainPage(driver);
         userApiClient = new UserApiClient();
-        // Создаём пользователя через API для тестов входа
         testUser = userApiClient.createRandomUser();
         mainPage.open();
     }
@@ -55,7 +54,6 @@ public class LoginTests {
         loginPage.enterEmail(testUser.getEmail());
         loginPage.enterPassword(testUser.getPassword());
         loginPage.clickLoginButton();
-
 
         assertTrue("Должна быть главная страница", driver.getCurrentUrl().contains("/"));
     }
