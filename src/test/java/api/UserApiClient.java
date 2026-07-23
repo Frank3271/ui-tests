@@ -2,44 +2,72 @@ package api;
 
 import io.restassured.response.Response;
 import model.User;
-// ui
+import model.RegisterResponse; // импорт нового класса
+
+import java.util.UUID;
+
 import static io.restassured.RestAssured.given;
-//ui
+
 public class UserApiClient {
-    private static final String BASE_URL = "https://stellarburgers.education-services.ru";
-    private String accessToken;
+
+    private static final String BASE_URL =
+            "https://stellarburgers.education-services.ru";
+
+    private String accessToken; // сохраняем токен для удаления
 
     public User createRandomUser() {
-        String email = "user_" + System.currentTimeMillis() + "@mail.com";
-        String password = "password123";
-        String name = "TestUser";
-        User user = new User(email, password, name);
 
-        Response response = given()
-                .header("Content-Type", "application/json")
-                .body(user)
-                .when()
-                .post(BASE_URL + "/api/auth/register");
+        String email =
+                "test" + UUID.randomUUID() + "@mail.com";
 
+        User newUser = new User(
+                email,
+                "Test1234",
+                "Test User"
+        );
 
-        if (response.statusCode() == 200 || response.statusCode() == 201) {
-            accessToken = response.jsonPath().getString("accessToken");
+        Response response =
+                given()
+                        .baseUri(BASE_URL)
+                        .header("Content-Type", "application/json")
+                        .body(newUser)
+                        .when()
+                        .post("/api/auth/register");
+
+        if (response.statusCode() == 200) {
+
+            // Десериализуем в RegisterResponse
+            RegisterResponse registerResponse =
+                    response.body().as(RegisterResponse.class);
+
+            // Сохраняем токен для удаления
+            this.accessToken = registerResponse.getAccessToken();
+
+            // Берём пользователя из ответа
+            User userFromResponse = registerResponse.getUser();
+
+            // Возвращаем User, пароль берём из исходного запроса
+            return new User(
+                    userFromResponse.getEmail(),
+                    newUser.getPassword(),
+                    userFromResponse.getName()
+            );
+
         } else {
-            System.err.println("Ошибка создания пользователя: " + response.statusCode());
-        }
 
-        return user;
+            throw new RuntimeException(
+                    "Не удалось создать пользователя. Код: "
+                            + response.statusCode()
+            );
+        }
     }
 
     public void deleteUser() {
         if (accessToken != null) {
-            Response response = given()
+            given()
                     .header("Authorization", accessToken)
                     .when()
                     .delete(BASE_URL + "/api/auth/user");
-            if (response.statusCode() != 202 && response.statusCode() != 200) {
-                System.err.println("Ошибка удаления пользователя: " + response.statusCode());
-            }
         }
     }
 }

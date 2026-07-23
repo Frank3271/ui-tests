@@ -40,10 +40,19 @@ public class LoginTests {
 
     @After
     public void tearDown() {
+
+        if (userApiClient != null && testUser != null) {
+            try {
+                userApiClient.deleteUser();
+            } catch (Exception e) {
+                System.out.println("Не удалось удалить пользователя: " + e.getMessage());
+            }
+        }
+
+
         if (driver != null) {
             driver.quit();
         }
-        userApiClient.deleteUser();
     }
 
     @Test
