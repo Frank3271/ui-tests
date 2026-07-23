@@ -12,7 +12,7 @@ import pages.MainPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.Assert.assertEquals;
-// IU тесты
+// IU тесты //ui
 public class ConstructorTests {
 
     private WebDriver driver;

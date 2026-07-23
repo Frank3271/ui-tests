@@ -16,7 +16,7 @@ import pages.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.Assert.assertTrue;
-
+//ui
 public class LoginTests {
 
     private WebDriver driver;

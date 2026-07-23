@@ -1,5 +1,5 @@
 package model;
-// IU тесты
+//ui
 public class User {
     private String email;
     private String password;

@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.qameta.allure.Step;
 import java.time.Duration;
 
-// UI-тесты
+//ui
 public class LoginPage {
     private WebDriver driver;
     private WebDriverWait wait;

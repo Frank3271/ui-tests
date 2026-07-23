@@ -12,7 +12,7 @@ import pages.MainPage;
 import pages.LoginPage;
 import pages.RegisterPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
+//ui
 import static org.junit.Assert.assertTrue;
 
 public class RegistrationTests {

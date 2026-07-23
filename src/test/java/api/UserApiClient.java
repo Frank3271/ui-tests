@@ -4,7 +4,7 @@ import io.restassured.response.Response;
 import model.User;
 // ui
 import static io.restassured.RestAssured.given;
-
+//ui
 public class UserApiClient {
     private static final String BASE_URL = "https://stellarburgers.education-services.ru";
     private String accessToken;
