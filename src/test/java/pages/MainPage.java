@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,12 +17,12 @@ public class MainPage {
     private final By personalAccountButton = By.xpath(".//a[@href='/account']");
     private final By constructorButton = By.xpath(".//a[@href='/']");
 
-    // Разделы конструктора — используем классы, а не текст
-    private final By bunSection = By.xpath(".//span[text()='Булки']/parent::div");
-    private final By sauceSection = By.xpath(".//span[text()='Соусы']/parent::div");
-    private final By fillingSection = By.xpath(".//span[text()='Начинки']/parent::div");
+    // Локаторы для вкладок конструктора — кликаем по самому span с текстом
+    private final By bunSection = By.xpath(".//span[text()='Булки']");
+    private final By sauceSection = By.xpath(".//span[text()='Соусы']");
+    private final By fillingSection = By.xpath(".//span[text()='Начинки']");
 
-    // Активная вкладка — ищем по классу
+    // Активная вкладка
     private final By activeSectionTab = By.xpath(".//div[contains(@class, 'tab_tab_type_current')]");
 
     public MainPage(WebDriver driver) {
@@ -30,7 +32,6 @@ public class MainPage {
 
     public void open() {
         driver.get("https://stellarburgers.education-services.ru/");
-        // Дополнительное ожидание загрузки страницы
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
     }
 
@@ -48,15 +49,18 @@ public class MainPage {
     }
 
     public void clickBunSection() {
-        wait.until(ExpectedConditions.elementToBeClickable(bunSection)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(bunSection));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public void clickSauceSection() {
-        wait.until(ExpectedConditions.elementToBeClickable(sauceSection)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(sauceSection));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public void clickFillingSection() {
-        wait.until(ExpectedConditions.elementToBeClickable(fillingSection)).click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(fillingSection));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public String getActiveSectionTabText() {

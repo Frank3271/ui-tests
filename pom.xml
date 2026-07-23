@@ -30,7 +30,7 @@
             <version>4.15.0</version>
         </dependency>
 
-        <!-- WebDriverManager (автоматическое скачивание драйверов) -->
+        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -38,7 +38,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Allure для отчётов -->
+        <!-- Allure -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
@@ -46,7 +46,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Логирование SLF4J (для устранения предупреждений) -->
+        <!-- SLF4J (для устранения предупреждений) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -54,5 +54,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

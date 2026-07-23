@@ -11,7 +11,6 @@ public class RestorePasswordPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // Локаторы
     private final By emailField = By.xpath(".//input[@name='email']");
     private final By restoreButton = By.xpath(".//button[text()='Восстановить']");
     private final By loginLink = By.xpath(".//a[@href='/login']");

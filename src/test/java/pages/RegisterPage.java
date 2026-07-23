@@ -11,9 +11,10 @@ public class RegisterPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    private final By nameField = By.xpath(".//input[@name='name' or @placeholder='Имя']");
-    private final By emailField = By.xpath(".//input[@name='email' or @placeholder='Email']");
-    private final By passwordField = By.xpath(".//input[@name='password' or @placeholder='Пароль']");
+    // Используем метки для поиска полей
+    private final By nameField = By.xpath(".//label[text()='Имя']/following-sibling::input");
+    private final By emailField = By.xpath(".//label[text()='Email']/following-sibling::input");
+    private final By passwordField = By.xpath(".//label[text()='Пароль']/following-sibling::input");
     private final By registerButton = By.xpath(".//button[text()='Зарегистрироваться']");
     private final By loginLink = By.xpath(".//a[@href='/login']");
     private final By errorMessage = By.xpath(".//p[contains(@class, 'input__error')]");

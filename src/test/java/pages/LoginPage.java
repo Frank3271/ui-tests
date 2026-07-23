@@ -11,9 +11,8 @@ public class LoginPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // Используем более устойчивые локаторы
-    private final By emailField = By.xpath(".//input[@name='email' or @placeholder='Email']");
-    private final By passwordField = By.xpath(".//input[@name='password' or @placeholder='Пароль']");
+    private final By emailField = By.xpath(".//label[text()='Email']/following-sibling::input");
+    private final By passwordField = By.xpath(".//label[text()='Пароль']/following-sibling::input");
     private final By loginButton = By.xpath(".//button[text()='Войти']");
     private final By registerLink = By.xpath(".//a[@href='/register']");
     private final By restorePasswordLink = By.xpath(".//a[@href='/forgot-password']");
