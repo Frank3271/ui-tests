@@ -17,7 +17,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
-
+// UI-тесты
 public class UIAuthTests {
 
     private WebDriver driver;
@@ -43,7 +43,6 @@ public class UIAuthTests {
         }
     }
 
-    // ========== ТЕСТЫ РЕГИСТРАЦИИ ==========
 
     @Test
     public void testSuccessfulRegistration() {
@@ -57,7 +56,6 @@ public class UIAuthTests {
         registerPage.enterPassword("password123");
         registerPage.clickRegisterButton();
 
-        // Ожидаем появления кнопки "Войти" на странице входа (более надёжно, чем проверка URL)
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         boolean loginButtonDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath(".//button[text()='Войти']")
@@ -81,7 +79,7 @@ public class UIAuthTests {
                 registerPage.isErrorMessageDisplayed());
     }
 
-    // ========== ТЕСТЫ ВХОДА ==========
+
 
     @Test
     public void testLoginFromMainPage() {
@@ -92,7 +90,7 @@ public class UIAuthTests {
         loginPage.enterPassword("password123");
         loginPage.clickLoginButton();
 
-        // Проверяем, что перешли на главную страницу (по наличию кнопки "Оформить заказ" или URL)
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         boolean isMainPage = wait.until(ExpectedConditions.urlContains("/"));
         assertTrue("Должна быть главная страница", isMainPage);
@@ -103,7 +101,6 @@ public class UIAuthTests {
         mainPage.open();
         mainPage.clickPersonalAccount();
 
-        // Ожидаем страницу входа
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         boolean isLoginPage = wait.until(ExpectedConditions.urlContains("/login"));
         assertTrue("Должна быть страница входа", isLoginPage);
@@ -116,7 +113,7 @@ public class UIAuthTests {
         registerPage = loginPage.clickRegisterLink();
         loginPage = registerPage.clickLoginLink();
 
-        // Ожидаем страницу входа
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         boolean isLoginPage = wait.until(ExpectedConditions.urlContains("/login"));
         assertTrue("Должна быть страница входа", isLoginPage);
@@ -128,7 +125,7 @@ public class UIAuthTests {
         loginPage = mainPage.clickLoginButton();
         loginPage.clickRestorePasswordLink();
 
-        // Ожидаем страницу восстановления пароля
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         boolean isRestorePage = wait.until(ExpectedConditions.urlContains("/forgot-password"));
         assertTrue("Должна быть страница восстановления", isRestorePage);
