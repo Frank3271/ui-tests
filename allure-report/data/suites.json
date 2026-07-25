@@ -1,0 +1,1 @@
+{"uid":"98d3104e051c652961429bf95fa0b5d6","name":"suites","children":[{"name":"UI-тесты для Stellar Burgers","uid":"1c184cb71f42ce95","parentUid":"98d3104e051c652961429bf95fa0b5d6","status":"passed","time":{},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]}]}
