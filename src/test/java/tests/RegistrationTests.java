@@ -1,7 +1,9 @@
 package tests;
-// IU тесты
+// IU
+import api.UserApiClient;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import model.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,19 +23,40 @@ public class RegistrationTests {
     private MainPage mainPage;
     private LoginPage loginPage;
     private RegisterPage registerPage;
-
+    private UserApiClient userApiClient;
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-size=1920,1080");
-        driver = new ChromeDriver(options);
+        // Выбор браузера через системную переменную (по умолчанию chrome)
+        String browser = System.getProperty("browser", "chrome");
+
+        if (browser.equals("yandex")) {
+            // Для Яндекс Браузера используем ChromeDriver с указанием пути к исполняемому файлу
+            System.setProperty("webdriver.chrome.driver", "путь_к_драйверу"); // или используйте WebDriverManager
+            ChromeOptions options = new ChromeOptions();
+            options.setBinary("C:\\Users\\Lecoo\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
+            driver = new ChromeDriver(options);
+        } else {
+            // По умолчанию Google Chrome
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--window-size=1920,1080");
+            driver = new ChromeDriver(options);
+        }
+
         mainPage = new MainPage(driver);
+        userApiClient = new UserApiClient();
         mainPage.open();
     }
 
     @After
     public void tearDown() {
+        if (userApiClient != null) {
+            try {
+                userApiClient.deleteUser();
+            } catch (Exception e) {
+                System.out.println("Не удалось удалить пользователя: " + e.getMessage());
+            }
+        }
         if (driver != null) {
             driver.quit();
         }
