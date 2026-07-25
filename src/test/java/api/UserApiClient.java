@@ -1,5 +1,5 @@
 package api;
-
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import model.User;
 import model.RegisterResponse; // импорт нового класса
@@ -14,7 +14,7 @@ public class UserApiClient {
             "https://stellarburgers.education-services.ru";
 
     private String accessToken; // сохраняем токен для удаления
-
+    @Step("Создание случайного пользователя через API")
     public User createRandomUser() {
 
         String email =
@@ -61,7 +61,7 @@ public class UserApiClient {
             );
         }
     }
-
+    @Step("Удаление пользователя через API")
     public void deleteUser() {
         if (accessToken != null) {
             given()
